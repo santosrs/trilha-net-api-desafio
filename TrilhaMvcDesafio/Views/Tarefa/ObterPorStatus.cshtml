@@ -1,0 +1,37 @@
+@model List<TrilhaMvcDesafio.Models.Tarefa>
+
+@{
+    ViewData["Title"] = "Pesquisa pelo Status";
+}
+
+<h2>Tarefas - Filtro por Status</h2>
+
+<div>
+    <table class="tabela-tarefa shadow tela-tarefa">
+        <thead>
+            <tr class="cabecario">
+                <th class="linha-cabecario">ID</th>
+                <th>TITULO</th>
+                <th>DESCRIÇÃO</th>
+                <th>DATA</th>
+                <th>STATUS</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tarefa in Model)
+            {
+                <tr>
+                    <td class="linha-cabecario">
+                        <a asp-action="Detalhes" asp-route-id="@tarefa.Id">@Html.DisplayFor(model => tarefa.Id)</a>
+                    </td>
+                    <td>@Html.DisplayFor(model => tarefa.Titulo)</td>
+                    <td>@Html.DisplayFor(model => tarefa.Descricao)</td>
+                    <td>@Html.DisplayFor(model => tarefa.Data)</td>
+                    <td>@Html.DisplayFor(model => tarefa.Status)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Index">Voltar</a>
+</div>

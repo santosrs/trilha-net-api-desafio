@@ -1,0 +1,40 @@
+@model TrilhaMvcDesafio.Models.Tarefa
+
+@{
+    ViewData["Title"] = "Pesquisa pelo Id";
+}
+
+<h2>Tarefas - Filtro por Id</h2>
+
+<div>
+    <table class="tabela-tarefa shadow tela-tarefa">
+        <thead>
+            <tr class="cabecario">
+                <th class="linha-cabecario">ID</th>
+                <th>TITULO</th>
+                <th>DESCRIÇÃO</th>
+                <th>DATA</th>
+                <th>STATUS</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+             @if (Model != null)
+            {
+                
+                 {
+                <tr>
+                     <td class="linha-cabecario">
+                        @Html.ActionLink(Model.Id.ToString(), "Detalhes", new { id = Model.Id }) 
+                    </td>
+                    <td>@Html.DisplayFor(model => model.Titulo)</td>
+                    <td>@Html.DisplayFor(model => model.Descricao)</td>
+                    <td>@Html.DisplayFor(model => model.Data)</td>
+                    <td>@Html.DisplayFor(model => model.Status)</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <a asp-action="Index">Voltar</a>
+</div>

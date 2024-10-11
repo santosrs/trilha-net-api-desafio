@@ -1,0 +1,123 @@
+
+@model IEnumerable<TrilhaMvcDesafio.Models.Tarefa>
+
+@{
+    ViewData["Title"] = "Listagem de Tarefas";
+}
+<h2>Tarefas</h2>
+<p>
+     <a asp-action="Criar" class="btn btn-success">Nova Tarefa</a>  
+</p>
+
+<div class="consultas d-flex bd-highlight">
+
+
+<form method="post" asp-action="ObterPorId">
+    
+    <div class="form-group pesquisar d-flex">
+        <div class="campoId">
+        <input type="number" id="Id" name="Id" class="form-control" placeholder="Digite o Id">
+        </div>
+        <button type="submit" class="campo btn btn-info ">Pesquisar</button>
+    </div>
+</form>
+
+<form asp-action="ObterPorStatus">
+        <div class="form-group pesquisar d-flex PesquisaStatus">
+                <label class="campo">Status</label>
+                <select id="status" name="status" opcao="status" class="campo custom-select custom-select-lg mb-3">
+                        <option selected>Selecione</option>
+                        <option value="0">Pendente</option>
+                        <option value="1">Finalizado</option>
+                    </select>
+            <button type="submit" class="campo btn btn-info">Pesquisar</button>
+        </div>
+        
+</form>
+
+
+<form method="post" asp-action="ObterPorTitulo">
+    
+    <div class="form-group pesquisar d-flex">
+        <div class="campo">
+        <input id="titulo" name="titulo" class="form-control" placeholder="Digite o Titulo">
+        </div>
+        <button type="submit" class="campo btn btn-info ">Pesquisar</button>
+    </div>
+</form>
+
+    <form asp-action="ObterPorData">
+        
+        <div class="form-group pesquisar d-flex">
+             <div class="campo">
+                <input id="data" name="data" type="Date" class="form-control" placeholder="Data Inicial">
+            </div>
+            <div class="campo">
+            <input id="data1" name="data1" type="Date" class="form-control" placeholder="Data Final">
+            </div>
+            <button type="submit" class="campo btn btn-info ">Pesquisar</button>
+        </div>
+
+    </form>
+</div>
+
+
+
+<div class="">
+    <table class="tabela-tarefa shadow tela-tarefa">
+        <thead>
+            <tr class="cabecario">
+                <th class="linha-cabecario">
+                    
+                    ID
+                </th>
+                <th>
+                    TITULO
+                </th>
+                <th>
+                    DESCRIÇÃO
+                </th>
+                <th>
+                    DATA
+                </th>
+                <th>
+                    STATUS
+                </th>
+                
+
+                <th>
+                    BOTÕES
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="linha-cabecario">
+                        @Html.ActionLink(item.Id.ToString(), "Detalhes", new { id = item.Id }, new { @class = "text-decoration-none" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Status)
+                    </td>
+                    
+
+                    <td class="selecao-icon">
+                        <a asp-action="Editar" asp-route-id="@item.Id">  <i class="fa fa-pencil"></i></a>
+                        <a asp-action="Detalhes" asp-route-id="@item.Id"><i class="fa fa-eye"></i></a>
+                        <a asp-action="Excluir" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
